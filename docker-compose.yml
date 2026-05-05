@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    container_name: spiralgeolog-api
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      retries: 3
